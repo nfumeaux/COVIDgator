@@ -1,4 +1,353 @@
-<h1>{{ article.article_title }}</h1>
-<h2>{{ article.article_publisher }}</h2>
-<h2>{{ article.article_url }}</h2>
-<h3>User rating: {{ article.article_rating }}</h3>
+{% load static %}
+{% load newsfeed_extras %}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Newspaper Template, Blog Post</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<!--
+Template 2060 Newspaper
+http://www.tooplate.com/view/2060-newspaper
+-->
+<link href="{% static 'newsfeed/tooplate_style.css' %}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="{% static 'newsfeed/nivo-slider.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'newsfeed/ddsmoothmenu.css' %}" />
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/ddsmoothmenu.js">
+
+/***********************************************
+* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "tooplate_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="tooplate_wrapper">
+
+    <div id="tooplate_header">
+        <div id="site_title"><h1><a href="#"></a></h1></div>
+        <div id="tooplate_menu" class="ddsmoothmenu">
+            <ul>
+                <li><a href="index.html" class="selected">Home</a></li>
+                <li><a href="about.html">About</a>
+                    <ul>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                  </ul>
+                </li>
+                <li><a href="portfolio.html">Portfolio</a>
+                    <ul>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                        <li><a href="#">Sub menu 1</a></li>
+                  </ul>
+                </li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <br style="clear: left" />
+        </div> <!-- end of tooplate_menu -->
+    </div> <!-- END of tooplate_header -->
+
+    <div id="tooplate_main">
+		<div id="content" class="float_l">
+        	<div class="post">
+
+            <h2>{{ article.article_title }}</h2>
+
+            <img src="{% static 'newsfeed/images/blog/01.jpg' %}" alt="" />
+            <div class="meta">
+                <span class="admin">{{ article.article_publisher }}</span><span class="date">{{ article.date_str }}</span><span class="tag"><a href="#">Prediction</a>, <a href="#">Politics</a></span><span class="comment"><a href="#">5 Comments</a></span>
+                <div class="cleaner"></div>
+            </div>
+
+</div>
+
+           <div class="cleaner h40"></div>
+            <h4>Comments</h4>
+
+              	<div id="comment_section">
+                <ol class="comments first_level">
+
+                        <li>
+                            <div class="comment_box commentbox1">
+
+                                <div class="gravatar">
+                                    <img class="image_frame" src="{% static 'newsfeed/images/avator.png' %}" alt="author 6" />
+                                </div>
+
+                                <div class="comment_text">
+                                    <div class="comment_author">Steven <span class="date">November 25, 2048</span> <span class="time">11:35 pm</span></div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.</p>
+                                  <div class="reply"><a href="#">Reply</a></div>
+                                </div>
+                                <div class="cleaner"></div>
+                            </div>
+
+                        </li>
+
+                        <li>
+
+
+                            	<ol class="comments">
+
+                                    <li>
+                                        <div class="comment_box commentbox2">
+
+                                        <div class="gravatar">
+                                            <img class="image_frame" src="images/avator.png" alt="author 6" />
+                                        </div>
+                                        <div class="comment_text">
+                                        <div class="comment_author">Richard <span class="date">November 27, 2048</span> <span class="time">10:20 pm</span></div>
+                                        <p>Nullam bibendum tempor est nec cursus. Sed at risus dui. Ut imperdiet libero at mauris vestibulum tempor.</p>
+                                        <div class="reply"><a href="#">Reply</a></div>
+                                        </div>
+
+                                        <div class="cleaner"></div>
+                                        </div>
+
+
+                                    </li>
+
+                                    <li>
+
+
+                                        <ol class="comments">
+
+                                            <li>
+                                                <div class="comment_box commentbox1">
+
+                                                    <div class="gravatar">
+                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
+                                </div>
+                                                    <div class="comment_text">
+                                                        <div class="comment_author">John <span class="date">November 28, 2048</span> <span class="time">11:42 am</span></div>
+                                                        <p> Vestibulum eget ligula et ipsum laoreet aliquam sed ut risus.Â  </p>
+                                                      <div class="reply"><a href="#">Reply</a></div>
+                                                    </div>
+
+                                                    <div class="cleaner"></div>
+                                                </div>
+
+
+                                            </li>
+
+                                        </ol>
+
+
+                        			</li>
+                                </ol>
+
+						</li>
+
+                        <li>
+                            <div class="comment_box commentbox1">
+
+
+                                <div class="gravatar">
+                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
+                                </div>
+                                <div class="comment_text">
+                                    <div class="comment_author">Martin <span class="date">November 29, 2048</span> <span class="time">07:35 am</span></div>
+                                    <p> Integer semper sollicitudin quam a ornare. Nam venenatis nibh ac sem faucibus et imperdiet magna laoreet. Nulla sagittis elit in enim ullamcorper vitae tincidunt metus bibendum.</p>
+                                  <div class="reply"><a href="#">Reply</a></div>
+                                </div>
+
+                                <div class="cleaner"></div>
+                            </div>
+
+
+                        </li>
+
+                        <li>
+                            <div class="comment_box commentbox1">
+
+                               <div class="gravatar">
+                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
+                                </div>
+                                <div class="comment_text">
+                                    <div class="comment_author">David <span class="date">November 30, 2048</span> <span class="time">10:54 am</span></div>
+                                    <p> Maecenas id orci vitae lectus fermentum posuere. Quisque ut risus nibh. Etiam consequat elit eu nisi porta ac auctor nisl ultrices.</p>
+                                  <div class="reply"><a href="#">Reply</a></div>
+                                </div>
+
+                                <div class="cleaner"></div>
+                            </div>
+
+
+                        </li>
+
+                </ol>
+                <div class="cleaner h20"></div>
+          		<div class="pagging">
+                    <ul>
+                         <li><a href="#" target="_parent">Previous</a></li>
+                    <li><a href="#" target="_parent">1</a></li>
+                    <li><a href="#" target="_parent">2</a></li>
+                    <li><a href="#" target="_parent">3</a></li>
+                    <li><a href="#" target="_parent">4</a></li>
+                    <li><a href="#" target="_parent">5</a></li>
+                    <li><a href="#" target="_parent">6</a></li>
+                    <li><a href="#" target="_parent">Next</a></li>
+                    </ul>
+                </div>
+
+                </div>
+
+                <div class="cleaner h20"></div>
+
+                <div id="comment_form">
+                    <h4>Leave your comment</h4>
+
+                    <form action="#" method="post">
+                        <div class="form_row">
+                            <label>Name (* required )</label>
+                            <br />
+                            <input type="text" name="name" class="txt_field" />
+
+                        </div>
+                        <div class="form_row">
+                            <label>Email  (* required but it will not be published )</label>
+                            <br />
+                            <input type="text" name="name" class="txt_field" />
+                        </div>
+                        <div class="form_row">
+                            <label>Your comment</label><br />
+                            <textarea  name="comment" rows="" cols=""></textarea>
+                        </div>
+
+                        <input type="submit" class="submit_btn" name="submit" id="submit" value="Send" />
+                    </form>
+
+
+            	</div>
+            <div class="cleaner"></div>
+        </div>
+
+        <div id="sidebar" class="float_r">
+        	<a href="#"><img src="images/ad_300.jpg" alt="image" /></a>
+
+            <div class="cleaner h40"></div>
+
+            <h5>Recent Articles</h5>
+                {% for article in recent_articles %}
+                <div class="rp_pp">
+                    <a href="#">{{ article.article_title }}</a>
+                    <p>{{ article.date_str }} - {{ article.rating_str }}</p>
+                    <div class="cleaner"></div>
+                </div>
+                {% endfor %}
+
+            <div class="cleaner h40"></div>
+
+            <h5>Popular Articles</h5>
+                {% for article in popular_articles %}
+                <div class="rp_pp">
+                    <a href="#">{{ article.article_title }}</a>
+                    <p>{{ article.date_str }} - {{ article.rating_str }}</p>
+                    <div class="cleaner"></div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="cleaner h40"></div>
+
+        	<!--<h5>Flickr Stream</h5>-->
+            <!--<ul class="flickr_stream">-->
+                <!--<li><a href="#"><img class="image_frame" src="images/tooplate_image_02.png" alt="" /></a></li>-->
+                <!--<li><a href="#"><img class="image_frame" src="images/tooplate_image_03.png" alt="" /></a></li>-->
+                <!--<li class="no_margin_right"><a href="#"><img class="image_frame" src="images/tooplate_image_04.png" alt="" /></a></li>-->
+                <!--<li><a href="#"><img class="image_frame" src="images/tooplate_image_05.png" alt="" /></a></li>-->
+                <!--<li><a href="#"><img class="image_frame" src="images/tooplate_image_06.png" alt="" /></a></li>-->
+                <!--<li class="no_margin_right"><a href="#"><img class="image_frame" src="images/tooplate_image_07.png" alt="" /></a></li>-->
+            <!--</ul>-->
+
+        </div>
+
+
+        <div class="cleaner"></div>
+	</div> <!-- END of tooplate_main -->
+
+</div> <!-- END of tooplate_wrapper -->
+
+<div id="tooplate_bottom_wrapper">
+	<div id="tooplate_bottom">
+    	<div class="col one_fourth">
+        	<h4>Categories</h4>
+            <ul class="footer_list">
+            	<li><a href="#">HTML CSS Layouts</a></li>
+                <li><a href="#">Website Templates</a></li>
+                <li><a href="#">Wordpress Themes</a></li>
+                <li><a href="#">Web Design Blog</a></li>
+                <li><a href="#">Art and Illustration</a></li>
+			</ul>
+        </div>
+        <div class="col one_fourth">
+        	<h4>Pages</h4>
+            <ul class="footer_list">
+            	<li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+			</ul>
+        </div>
+        <div class="col one_fourth">
+        	<h4>Follow Us</h4>
+
+            <div class="footer_social_button">
+                <a href="#"><img src="images/facebook.png" alt="facebook" /></a>
+                <a href="#"><img src="images/flickr.png" alt="flickr" /></a>
+                <a href="#"><img src="images/twitter.png" alt="twitter" /></a>
+                <a href="#"><img src="images/youtube.png" alt="youtube" /></a>
+                <a href="#"><img src="images/feed.png" alt="rss" /></a>
+			</div>
+
+        </div>
+
+        <div class="col one_fourth no_margin_right">
+        	<h4>Twitter</h4>
+            <ul class="twitter_post">
+	            <li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>
+			</ul>
+        </div>
+        <div class="cleaner"></div>
+    </div> <!-- END of tooplate_bottom -->
+</div> <!-- END of tooplate_bottom_wrapper -->
+
+<div id="tooplate_footer_wrapper">
+	<div id="tooplate_footer">
+    	 Copyright Â© 2048 Your Company Name
+    </div> <!-- END of tooplate_footer -->
+</div> <!-- END of tooplate_footer_wrapper -->
+
+</body>
+</html>

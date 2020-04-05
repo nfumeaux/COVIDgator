@@ -1,0 +1,15 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'newsfeed/style.css' %}">
+
+<h1 style="color: white">Articles list</h1>
+{% if latest_articles_list %}
+    <ul>
+    {% for article in latest_articles_list %}
+        <li style="background-color: white"><a href="{% url 'newsfeed:detail' article.id %}">{{ article.article_title }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No articles are available.</p>
+{% endif %}
+

@@ -1,9 +1,214 @@
-{% if latest_articles_list %}
-    <ul>
-    {% for article in latest_articles_list %}
-        <li><a href="/newsfeed/{{ article.id }}/">{{ article.article_title }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No articles are available.</p>
-{% endif %}
+{% load static %}
+{% load newsfeed_extras %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Newspaper, free website template</title>
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<!--
+Template 2060 Newspaper
+http://www.tooplate.com/view/2060-newspaper
+-->
+<link href="{% static 'newsfeed/tooplate_style.css' %}" rel="stylesheet" type="text/css" />
+
+<link rel="stylesheet" href="{% static 'newsfeed/nivo-slider.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="{% static 'newsfeed/ddsmoothmenu.css' %}" />
+
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/ddsmoothmenu.js">
+
+/***********************************************
+* Smooth Navigational Menu- (c) Dynamic Drive DHTML code library (www.dynamicdrive.com)
+* This notice MUST stay intact for legal use
+* Visit Dynamic Drive at http://www.dynamicdrive.com/ for full source code
+***********************************************/
+
+</script>
+
+<script type="text/javascript">
+
+ddsmoothmenu.init({
+	mainmenuid: "tooplate_menu", //menu DIV id
+	orientation: 'h', //Horizontal or vertical menu: Set to "h" or "v"
+	classname: 'ddsmoothmenu', //class added to menu's outer DIV
+	//customtheme: ["#1c5a80", "#18374a"],
+	contentsource: "markup" //"markup" or ["container_id", "path_to_menu_file"]
+})
+
+</script>
+
+
+</head>
+
+<body>
+
+<div id="tooplate_wrapper">
+
+    <div id="tooplate_header">
+        <div id="site_title"><h1><a href="#"></a></h1></div>
+        <div id="tooplate_menu" class="ddsmoothmenu">
+            <ul>
+                <li><a href="index.html" class="selected">Home</a></li>
+                <li><a href="about.html">About</a>
+                    <ul>
+                        <li><a href="#">The team</a></li>
+                        <li><a href="#">The hackathon</a></li>
+                        <li><a href="#">The mission</a></li>
+                  </ul>
+                </li>
+
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <br style="clear: left" />
+        </div> <!-- end of tooplate_menu -->
+    </div> <!-- END of tooplate_header -->
+
+
+
+        <div class="cleaner h30"></div>
+
+        <div class="newscol col half">
+	        <h2>COVID-19 Switzerland News</h2>
+            <div class="newsbox col one_fourth">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.0.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.0.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth no_margin_right">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}"><img src="{% static 'newsfeed/images/tooplate_image_02.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}">{{ latest_articles_list.1.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.1.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.1.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}"><img src="{% static 'newsfeed/images/tooplate_image_03.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}">{{ latest_articles_list.2.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.2.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.2.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth no_margin_right">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}"><img src="{% static 'newsfeed/images/tooplate_image_04.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}">{{ latest_articles_list.3.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.3.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.3.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+        </div>
+
+        <div class="newscol col half no_margin_right">
+	        <h2>COVID-19 Worldwide news</h2>
+            <div class="newsbox col one_fourth">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.0.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.0.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth no_margin_right">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}"><img src="{% static 'newsfeed/images/tooplate_image_02.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}">{{ latest_articles_list.1.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.1.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.1.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}"><img src="{% static 'newsfeed/images/tooplate_image_03.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}">{{ latest_articles_list.2.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.2.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.2.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+            <div class="newsbox col one_fourth no_margin_right">
+            	<a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}"><img src="{% static 'newsfeed/images/tooplate_image_04.jpg' %}" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}">{{ latest_articles_list.3.article_title }}</a></h6>
+                <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.3.article_positive_votes}}</p>
+                <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
+                <p>{{ latest_articles_list.3.article_negative_votes }}</p>
+           	  <div class="cleaner"></div>
+            </div>
+        </div>
+
+		<div class="cleaner"></div>
+
+
+	</div> <!-- END of tooplate_main -->
+
+</div> <!-- END of tooplate_wrapper -->
+
+<div id="tooplate_bottom_wrapper">
+	<div id="tooplate_bottom">
+    	<div class="col one_fourth">
+        	<h4>Categories</h4>
+            <ul class="footer_list">
+            	<li><a href="#">HTML CSS Layouts</a></li>
+                <li><a href="#">Website Templates</a></li>
+                <li><a href="#">Wordpress Themes</a></li>
+                <li><a href="#">Web Design Blog</a></li>
+                <li><a href="#">Art and Illustration</a></li>
+			</ul>
+        </div>
+        <div class="col one_fourth">
+        	<h4>Pages</h4>
+            <ul class="footer_list">
+            	<li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+			</ul>
+        </div>
+        <div class="col one_fourth">
+        	<h4>Follow Us</h4>
+
+            <div class="footer_social_button">
+                <a href="#"><img src="images/facebook.png" alt="facebook" /></a>
+                <a href="#"><img src="images/flickr.png" alt="flickr" /></a>
+                <a href="#"><img src="images/twitter.png" alt="twitter" /></a>
+                <a href="#"><img src="images/youtube.png" alt="youtube" /></a>
+                <a href="#"><img src="images/feed.png" alt="rss" /></a>
+			</div>
+
+        </div>
+
+        <div class="col one_fourth no_margin_right">
+        	<h4>Twitter</h4>
+            <ul class="twitter_post">
+	            <li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>
+			</ul>
+        </div>
+        <div class="cleaner"></div>
+    </div> <!-- END of tooplate_bottom -->
+</div> <!-- END of tooplate_bottom_wrapper -->
+
+<div id="tooplate_footer_wrapper">
+	<div id="tooplate_footer">
+    	 Copyright Â© 2048 Your Company Name
+    </div> <!-- END of tooplate_footer -->
+</div> <!-- END of tooplate_footer_wrapper -->
+
+</body>
+</html>

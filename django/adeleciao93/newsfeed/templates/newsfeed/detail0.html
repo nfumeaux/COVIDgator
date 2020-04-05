@@ -1,0 +1,21 @@
+{% load newsfeed_extras %}
+
+<h1>{{ article.article_title }}</h1>
+<h2>{{ article.article_publisher }}</h2>
+<h2>{{ article.article_url }}</h2>
+<h3>User (logged in) rating: {{ vote_value }}</h3>
+<h3>Vote</h3>
+
+<form action="{% url 'newsfeed:vote' article.id %}" method="post">
+{% csrf_token %}
+    {% if vote_value == 1 %}
+    <button type="submit" name="choice" value="like" style="color: blue">Like</button>
+    {% else %}
+    <button type="submit" name="choice" value="like">Like</button>
+    {% endif %}
+    {% if vote_value == -1 %}
+    <button type="submit" name="choice" value="dislike" style="color: red">Dislike</button>
+    {% else %}
+    <button type="submit" name="choice" value="dislike">Dislike</button>
+    {% endif %}
+</form>
