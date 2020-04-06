@@ -23,7 +23,10 @@ def detail(request, article_id):
     except Article.DoesNotExist:
         raise Http404("Question does not exist")
     # provide the current voting state for that user to properly display the buttons
-    vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    if request.user.is_authenticated:
+        vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    else:
+        vote = False
     # convention here, 0 if no vote yet, -1 if disliked, 1 if liked
     vote_value = vote[0].vote_value if vote else 0
     # provide also 3 most liked and 3 most recent articles
@@ -39,7 +42,11 @@ def detail(request, article_id):
 
 def vote(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
-    vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    if request.user.is_authenticated:
+        vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    else:
+        # TODO: display and error message saying user should log-in to vote
+        return HttpResponseRedirect(reverse('newsfeed:detail', args=(article.id,)))
     # as before, get the current vote value for the user to assess what to do depending on what button was clicked
     vote_value = vote[0].vote_value if vote else 0
     # get what the user pressed
@@ -86,7 +93,11 @@ def vote(request, article_id):
 
 def comment(request, article_id):
     article = get_object_or_404(Article, pk=article_id)
-    vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    if request.user.is_authenticated:
+        vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    else:
+        # TODO: display and error message saying user should log-in to comment
+        return HttpResponseRedirect(reverse('newsfeed:detail', args=(article.id,)))
     vote_value = vote[0].vote_value if vote else 0
     try:
         comment_text = request.POST['comment']
