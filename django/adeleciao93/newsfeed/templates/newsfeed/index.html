@@ -81,7 +81,7 @@ ddsmoothmenu.init({
         <div class="cleaner h30"></div>
 
         <div class="newscol col half">
-	        <h2>COVID-19 Switzerland News</h2>
+	        <h2>COVID-19 Recent News</h2>
             <div class="newsbox col one_fourth">
             	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
                 <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
@@ -121,7 +121,7 @@ ddsmoothmenu.init({
         </div>
 
         <div class="newscol col half no_margin_right">
-	        <h2>COVID-19 Worldwide news</h2>
+	        <h2>COVID-19 Popular news</h2>
             <div class="newsbox col one_fourth">
             	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
                 <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
