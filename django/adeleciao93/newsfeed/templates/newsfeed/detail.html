@@ -6,13 +6,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Newspaper Template, Blog Post</title>
+<title>Article detail</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <!--
 Template 2060 Newspaper
 http://www.tooplate.com/view/2060-newspaper
 -->
+    <link rel="stylesheet" type="text/css" href="{% static 'newsfeed/style.css' %}">
+
 <link href="{% static 'newsfeed/tooplate_style.css' %}" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" href="{% static 'newsfeed/nivo-slider.css' %}" type="text/css" media="screen" />
@@ -53,7 +55,7 @@ ddsmoothmenu.init({
         <div id="site_title"><h1><a href="#"></a></h1></div>
         <div id="tooplate_menu" class="ddsmoothmenu">
             <ul>
-                <li><a href="index.html" class="selected">Home</a></li>
+                <li><a href="{% url 'newsfeed:index' %}" class="selected">Home</a></li>
                 <li><a href="about.html">About</a>
                     <ul>
                         <li><a href="#">Sub menu 1</a></li>
@@ -61,7 +63,7 @@ ddsmoothmenu.init({
                         <li><a href="#">Sub menu 1</a></li>
                   </ul>
                 </li>
-                <li><a href="portfolio.html">Portfolio</a>
+                <li><a href="portfolio.html">Log in</a>
                     <ul>
                         <li><a href="#">Sub menu 1</a></li>
                         <li><a href="#">Sub menu 1</a></li>
@@ -70,7 +72,7 @@ ddsmoothmenu.init({
                         <li><a href="#">Sub menu 1</a></li>
                   </ul>
                 </li>
-                <li><a href="blog.html">Blog</a></li>
+                <li><a href="blog.html">Sign up</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <br style="clear: left" />
@@ -83,12 +85,29 @@ ddsmoothmenu.init({
 
             <h2>{{ article.article_title }}</h2>
 
-            <img src="{% static 'newsfeed/images/blog/01.jpg' %}" alt="" />
+                <a href={{ article.article_url }} ><img src="{% static 'newsfeed/images/blog/03.jpg' %}" style="width:600px; height:200px" alt="" /></a>
             <div class="meta">
-                <span class="admin">{{ article.article_publisher }}</span><span class="date">{{ article.date_str }}</span><span class="tag"><a href="#">Prediction</a>, <a href="#">Politics</a></span><span class="comment"><a href="#">5 Comments</a></span>
+                <span class="admin">{{ article.article_publisher }}</span><span class="date">{{ article.date_str }}</span><span class="tag"><a href="#">Prediction</a>, <a href="#">Politics</a></span><span class="comment"><a href="#">{{article.n_comments}} Comments</a></span>
                 <div class="cleaner"></div>
             </div>
-
+            <div class="post">
+            <form action="{% url 'newsfeed:vote' article.id %}" method="post">
+            {% csrf_token %}
+                {{ article.article_positive_votes }}
+                {% if vote_value == 1 %}
+                <button id="like-button" type="submit" name="choice" value="like"><img src="{% static 'newsfeed/images/arrow-up.png' %}" /></button>
+                {% else %}
+                <button id="like-button" type="submit" name="choice" value="like"><img src="{% static 'newsfeed/images/arrow-up_unactivated.png' %}" /></button>
+                {% endif %}
+                {{ article.rating_str }}
+                {% if vote_value == -1 %}
+                <button id="like-button" type="submit" name="choice" value="dislike"><img src="{% static 'newsfeed/images/arrow-down.png' %}" /></button>
+                {% else %}
+                <button id="like-button" type="submit" name="choice" value="dislike"><img src="{% static 'newsfeed/images/arrow-down_unactivated.png' %}" /></button>
+                {% endif %}
+                {{ article.article_negative_votes }}
+            </form>
+            </div>
 </div>
 
            <div class="cleaner h40"></div>
@@ -97,113 +116,107 @@ ddsmoothmenu.init({
               	<div id="comment_section">
                 <ol class="comments first_level">
 
-                        <li>
-                            <div class="comment_box commentbox1">
+                    {% if comments %}
+                        {% for comment in comments %}
+                            <li>
+                                <div class="comment_box commentbox1">
 
-                                <div class="gravatar">
-                                    <img class="image_frame" src="{% static 'newsfeed/images/avator.png' %}" alt="author 6" />
-                                </div>
+                                    <div class="gravatar">
+                                        <img class="image_frame" src="{% static 'newsfeed/images/avator.png' %}" alt="author image" />
+                                    </div>
+                                    <div class="comment_text">
+                                        <div class="comment_author">{{ comment.comment_user.username }}
+                                            {% if comment.comment_user.user_profile.user_verified %}
+                                            <img src="{% static 'newsfeed/images/verified_check.jpeg' %}" style="width:15px;height:15px" alt="check" />
 
-                                <div class="comment_text">
-                                    <div class="comment_author">Steven <span class="date">November 25, 2048</span> <span class="time">11:35 pm</span></div>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus dictum ornare nulla ac laoreet.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-                                <div class="cleaner"></div>
-                            </div>
-
-                        </li>
-
-                        <li>
-
-
-                            	<ol class="comments">
-
-                                    <li>
-                                        <div class="comment_box commentbox2">
-
-                                        <div class="gravatar">
-                                            <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                        </div>
-                                        <div class="comment_text">
-                                        <div class="comment_author">Richard <span class="date">November 27, 2048</span> <span class="time">10:20 pm</span></div>
-                                        <p>Nullam bibendum tempor est nec cursus. Sed at risus dui. Ut imperdiet libero at mauris vestibulum tempor.</p>
+                                            {% endif %}
+                                            <span class="date">{{ comment.date_str }}</span>
+                                            <span class="time">{{ comment.time_str }}</span></div>
+                                        <p>{{ comment.comment_text }}</p>
                                         <div class="reply"><a href="#">Reply</a></div>
-                                        </div>
-
-                                        <div class="cleaner"></div>
-                                        </div>
-
-
-                                    </li>
-
-                                    <li>
-
-
-                                        <ol class="comments">
-
-                                            <li>
-                                                <div class="comment_box commentbox1">
-
-                                                    <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
+                                    </div>
+                                    <div class="cleaner"></div>
                                 </div>
-                                                    <div class="comment_text">
-                                                        <div class="comment_author">John <span class="date">November 28, 2048</span> <span class="time">11:42 am</span></div>
-                                                        <p> Vestibulum eget ligula et ipsum laoreet aliquam sed ut risus.Â  </p>
-                                                      <div class="reply"><a href="#">Reply</a></div>
-                                                    </div>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
 
-                                                    <div class="cleaner"></div>
-                                                </div>
+                    <!--<li>-->
+                        <!--<ol class="comments">-->
 
+                            <!--<li>-->
+                                <!--<div class="comment_box commentbox2">-->
 
-                                            </li>
+                                    <!--<div class="gravatar">-->
+                                        <!--<img class="image_frame" src="images/avator.png" alt="author 6" />-->
+                                    <!--</div>-->
+                                    <!--<div class="comment_text">-->
+                                        <!--<div class="comment_author">Richard <span class="date">November 27, 2048</span> <span class="time">10:20 pm</span></div>-->
+                                        <!--<p>Nullam bibendum tempor est nec cursus. Sed at risus dui. Ut imperdiet libero at mauris vestibulum tempor.</p>-->
+                                        <!--<div class="reply"><a href="#">Reply</a></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="cleaner"></div>-->
+                                <!--</div>-->
+                            <!--</li>-->
 
-                                        </ol>
+                    <!--<li>-->
+                        <!--<ol class="comments">-->
 
+                            <!--<li>-->
+                                <!--<div class="comment_box commentbox1">-->
 
-                        			</li>
-                                </ol>
+                                    <!--<div class="gravatar">-->
+                                        <!--<img class="image_frame" src="images/avator.png" alt="author 6" />-->
+                                    <!--</div>-->
+                                    <!--<div class="comment_text">-->
+                                        <!--<div class="comment_author">John <span class="date">November 28, 2048</span> <span class="time">11:42 am</span></div>-->
+                                        <!--<p> Vestibulum eget ligula et ipsum laoreet aliquam sed ut risus.Â  </p>-->
+                                        <!--<div class="reply"><a href="#">Reply</a></div>-->
+                                    <!--</div>-->
+                                    <!--<div class="cleaner"></div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        <!--</ol>-->
+                    <!--</li>-->
+                        <!--</ol>-->
+                    <!--</li>-->
 
-						</li>
-
-                        <li>
-                            <div class="comment_box commentbox1">
-
-
-                                <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                <div class="comment_text">
-                                    <div class="comment_author">Martin <span class="date">November 29, 2048</span> <span class="time">07:35 am</span></div>
-                                    <p> Integer semper sollicitudin quam a ornare. Nam venenatis nibh ac sem faucibus et imperdiet magna laoreet. Nulla sagittis elit in enim ullamcorper vitae tincidunt metus bibendum.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-
-                                <div class="cleaner"></div>
-                            </div>
-
-
-                        </li>
-
-                        <li>
-                            <div class="comment_box commentbox1">
-
-                               <div class="gravatar">
-                                    <img class="image_frame" src="images/avator.png" alt="author 6" />
-                                </div>
-                                <div class="comment_text">
-                                    <div class="comment_author">David <span class="date">November 30, 2048</span> <span class="time">10:54 am</span></div>
-                                    <p> Maecenas id orci vitae lectus fermentum posuere. Quisque ut risus nibh. Etiam consequat elit eu nisi porta ac auctor nisl ultrices.</p>
-                                  <div class="reply"><a href="#">Reply</a></div>
-                                </div>
-
-                                <div class="cleaner"></div>
-                            </div>
+                        <!--<li>-->
+                            <!--<div class="comment_box commentbox1">-->
 
 
-                        </li>
+                                <!--<div class="gravatar">-->
+                                    <!--<img class="image_frame" src="images/avator.png" alt="author 6" />-->
+                                <!--</div>-->
+                                <!--<div class="comment_text">-->
+                                    <!--<div class="comment_author">Martin <span class="date">November 29, 2048</span> <span class="time">07:35 am</span></div>-->
+                                    <!--<p> Integer semper sollicitudin quam a ornare. Nam venenatis nibh ac sem faucibus et imperdiet magna laoreet. Nulla sagittis elit in enim ullamcorper vitae tincidunt metus bibendum.</p>-->
+                                  <!--<div class="reply"><a href="#">Reply</a></div>-->
+                                <!--</div>-->
+
+                                <!--<div class="cleaner"></div>-->
+                            <!--</div>-->
+
+
+                        <!--</li>-->
+
+                        <!--<li>-->
+                            <!--<div class="comment_box commentbox1">-->
+
+                               <!--<div class="gravatar">-->
+                                    <!--<img class="image_frame" src="images/avator.png" alt="author 6" />-->
+                                <!--</div>-->
+                                <!--<div class="comment_text">-->
+                                    <!--<div class="comment_author">David <span class="date">November 30, 2048</span> <span class="time">10:54 am</span></div>-->
+                                    <!--<p> Maecenas id orci vitae lectus fermentum posuere. Quisque ut risus nibh. Etiam consequat elit eu nisi porta ac auctor nisl ultrices.</p>-->
+                                  <!--<div class="reply"><a href="#">Reply</a></div>-->
+                                <!--</div>-->
+
+                                <!--<div class="cleaner"></div>-->
+                            <!--</div>-->
+
+
+                        <!--</li>-->
 
                 </ol>
                 <div class="cleaner h20"></div>
@@ -225,20 +238,23 @@ ddsmoothmenu.init({
                 <div class="cleaner h20"></div>
 
                 <div id="comment_form">
+
                     <h4>Leave your comment</h4>
 
-                    <form action="#" method="post">
-                        <div class="form_row">
-                            <label>Name (* required )</label>
-                            <br />
-                            <input type="text" name="name" class="txt_field" />
+                    <form action="{% url 'newsfeed:comment' article.id %}" method="post">
+                        {% csrf_token %}
 
-                        </div>
-                        <div class="form_row">
-                            <label>Email  (* required but it will not be published )</label>
-                            <br />
-                            <input type="text" name="name" class="txt_field" />
-                        </div>
+                        <!--<div class="form_row">-->
+                            <!--<label>Name (* required )</label>-->
+                            <!--<br />-->
+                            <!--<input type="text" name="name" class="txt_field" />-->
+
+                        <!--</div>-->
+                        <!--<div class="form_row">-->
+                            <!--<label>Email  (* required but it will not be published )</label>-->
+                            <!--<br />-->
+                            <!--<input type="text" name="name" class="txt_field" />-->
+                        <!--</div>-->
                         <div class="form_row">
                             <label>Your comment</label><br />
                             <textarea  name="comment" rows="" cols=""></textarea>
@@ -298,54 +314,54 @@ ddsmoothmenu.init({
 
 </div> <!-- END of tooplate_wrapper -->
 
-<div id="tooplate_bottom_wrapper">
-	<div id="tooplate_bottom">
-    	<div class="col one_fourth">
-        	<h4>Categories</h4>
-            <ul class="footer_list">
-            	<li><a href="#">HTML CSS Layouts</a></li>
-                <li><a href="#">Website Templates</a></li>
-                <li><a href="#">Wordpress Themes</a></li>
-                <li><a href="#">Web Design Blog</a></li>
-                <li><a href="#">Art and Illustration</a></li>
-			</ul>
-        </div>
-        <div class="col one_fourth">
-        	<h4>Pages</h4>
-            <ul class="footer_list">
-            	<li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-			</ul>
-        </div>
-        <div class="col one_fourth">
-        	<h4>Follow Us</h4>
+<!--<div id="tooplate_bottom_wrapper">-->
+	<!--<div id="tooplate_bottom">-->
+    	<!--<div class="col one_fourth">-->
+        	<!--<h4>Categories</h4>-->
+            <!--<ul class="footer_list">-->
+            	<!--<li><a href="#">HTML CSS Layouts</a></li>-->
+                <!--<li><a href="#">Website Templates</a></li>-->
+                <!--<li><a href="#">Wordpress Themes</a></li>-->
+                <!--<li><a href="#">Web Design Blog</a></li>-->
+                <!--<li><a href="#">Art and Illustration</a></li>-->
+			<!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col one_fourth">-->
+        	<!--<h4>Pages</h4>-->
+            <!--<ul class="footer_list">-->
+            	<!--<li><a href="index.html">Home</a></li>-->
+                <!--<li><a href="about.html">About</a></li>-->
+                <!--<li><a href="portfolio.html">Portfolio</a></li>-->
+                <!--<li><a href="blog.html">Blog</a></li>-->
+                <!--<li><a href="contact.html">Contact</a></li>-->
+			<!--</ul>-->
+        <!--</div>-->
+        <!--<div class="col one_fourth">-->
+        	<!--<h4>Follow Us</h4>-->
 
-            <div class="footer_social_button">
-                <a href="#"><img src="images/facebook.png" alt="facebook" /></a>
-                <a href="#"><img src="images/flickr.png" alt="flickr" /></a>
-                <a href="#"><img src="images/twitter.png" alt="twitter" /></a>
-                <a href="#"><img src="images/youtube.png" alt="youtube" /></a>
-                <a href="#"><img src="images/feed.png" alt="rss" /></a>
-			</div>
+            <!--<div class="footer_social_button">-->
+                <!--<a href="#"><img src="images/facebook.png" alt="facebook" /></a>-->
+                <!--<a href="#"><img src="images/flickr.png" alt="flickr" /></a>-->
+                <!--<a href="#"><img src="images/twitter.png" alt="twitter" /></a>-->
+                <!--<a href="#"><img src="images/youtube.png" alt="youtube" /></a>-->
+                <!--<a href="#"><img src="images/feed.png" alt="rss" /></a>-->
+			<!--</div>-->
 
-        </div>
+        <!--</div>-->
 
-        <div class="col one_fourth no_margin_right">
-        	<h4>Twitter</h4>
-            <ul class="twitter_post">
-	            <li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>
-			</ul>
-        </div>
-        <div class="cleaner"></div>
-    </div> <!-- END of tooplate_bottom -->
-</div> <!-- END of tooplate_bottom_wrapper -->
+        <!--<div class="col one_fourth no_margin_right">-->
+        	<!--<h4>Twitter</h4>-->
+            <!--<ul class="twitter_post">-->
+	            <!--<li>Suspendisse at scelerisque urna. Aenean tincidunt massa in tellus varius ultricies. <a href="#">http://bit.ly/13IwZO</a></li>-->
+			<!--</ul>-->
+        <!--</div>-->
+        <!--<div class="cleaner"></div>-->
+    <!--</div> &lt;!&ndash; END of tooplate_bottom &ndash;&gt;-->
+<!--</div> &lt;!&ndash; END of tooplate_bottom_wrapper &ndash;&gt;-->
 
 <div id="tooplate_footer_wrapper">
 	<div id="tooplate_footer">
-    	 Copyright Â© 2048 Your Company Name
+    	 Copyright © 2020 Adeleciao Inc.
     </div> <!-- END of tooplate_footer -->
 </div> <!-- END of tooplate_footer_wrapper -->
 

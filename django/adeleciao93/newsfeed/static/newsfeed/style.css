@@ -1,7 +1,21 @@
-li a {
-    color: green;
+button {
+    display: inline-block;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: none;
+    vertical-align: top;
+    width: 20px;
 }
 
-body {
-    background: white url("images/background.jpeg") repeat;
+#like-button img {
+    height: 17px;
+    width: 17px;
 }
+
+#close-CSS {
+    background-image: url( 'http://thinkingstiff.com/images/matt.jpg' );
+    background-size: 100px 130px;
+    height: 134px;
+    width: 104px;

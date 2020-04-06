@@ -2,7 +2,8 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.template import loader
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
-from .models import Article, Vote
+from django.utils import timezone
+from .models import Article, Vote, Comment
 
 
 # list of articles
@@ -26,8 +27,12 @@ def detail(request, article_id):
     # provide also 3 most liked and 3 most recent articles
     recent_articles = Article.objects.order_by('-article_date')[:3]
     popular_articles = Article.objects.order_by('-article_positive_votes')[:3]
+    # and the comments from this article
+    comments = article.article_comments.all()
+    print(comments)
     return render(request, 'newsfeed/detail.html', {'article': article, 'vote_value': vote_value,
-                                        'recent_articles': recent_articles, 'popular_articles': popular_articles})
+                                        'recent_articles': recent_articles, 'popular_articles': popular_articles,
+                                                    'comments': comments})
 
 
 def vote(request, article_id):
@@ -50,21 +55,53 @@ def vote(request, article_id):
             if vote_value == 0:
                 vote = Vote(vote_article=article, vote_value=1, vote_user=request.user)
                 vote.save()
+                article.article_positive_votes += 1
             elif vote_value == 1:
                 vote[0].delete()
+                article.article_positive_votes -= 1
             elif vote_value == -1:
                 vote[0].vote_value = 1
                 vote[0].save()
+                article.article_positive_votes += 1
+                article.article_negative_votes -= 1
         elif selected_choice == 'dislike':
             if vote_value == 0:
                 vote = Vote(vote_article=article, vote_value=-1, vote_user=request.user)
                 vote.save()
+                article.article_negative_votes += 1
             elif vote_value == 1:
                 vote[0].vote_value = -1
                 vote[0].save()
+                article.article_positive_votes -= 1
+                article.article_negative_votes += 1
             elif vote_value == -1:
                 vote[0].delete()
-            # article.article_negative_votes += 1
-            # article.save()
+                article.article_negative_votes -= 1
+        article.save()
     # redirect the user immediately to the details page
+    return HttpResponseRedirect(reverse('newsfeed:detail', args=(article.id,)))
+
+
+def comment(request, article_id):
+    article = get_object_or_404(Article, pk=article_id)
+    vote = Vote.objects.filter(vote_article_id=article_id).filter(vote_user=request.user)
+    vote_value = vote[0].vote_value if vote else 0
+    try:
+        comment_text = request.POST['comment']
+    # handle a possible error
+    except (KeyError, comment_text.DoesNotExist):
+        # Redisplay the question voting form.
+
+        return render(request, 'newsfeed/detail.html', {
+            'article': Article.objects.get(pk=article_id),
+            'vote_value': vote_value,
+        })
+    else:
+        # add a comment to the article
+        comment = Comment.objects.create(comment_text=comment_text,
+                                         comment_user=request.user,
+                                         comment_date=timezone.now())
+        comment.save()
+        article.article_comments.add(comment)
+        article.save()
     return HttpResponseRedirect(reverse('newsfeed:detail', args=(article.id,)))
