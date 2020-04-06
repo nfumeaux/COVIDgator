@@ -276,7 +276,7 @@ ddsmoothmenu.init({
             <h5>Recent Articles</h5>
                 {% for article in recent_articles %}
                 <div class="rp_pp">
-                    <a href="#">{{ article.article_title }}</a>
+                    <a href="{% url 'newsfeed:detail' article.id %}">{{ article.article_title }}</a>
                     <p>{{ article.date_str }} - {{ article.rating_str }}</p>
                     <div class="cleaner"></div>
                 </div>
@@ -287,7 +287,7 @@ ddsmoothmenu.init({
             <h5>Popular Articles</h5>
                 {% for article in popular_articles %}
                 <div class="rp_pp">
-                    <a href="#">{{ article.article_title }}</a>
+                    <a href="{% url 'newsfeed:detail' article.id %}">{{ article.article_title }}</a>
                     <p>{{ article.date_str }} - {{ article.rating_str }}</p>
                     <div class="cleaner"></div>
                 </div>

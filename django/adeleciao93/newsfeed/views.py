@@ -10,7 +10,9 @@ from .models import Article, Vote, Comment
 def index(request):
     latest_articles_list = Article.objects.order_by('-article_date')[:5]
     template = loader.get_template('newsfeed/index.html')
-    context = {'latest_articles_list': latest_articles_list}
+    recent_articles = Article.objects.order_by('-article_date')[:4]
+    popular_articles = Article.objects.order_by('-article_positive_votes')[:4]
+    context = {'recent_articles': recent_articles, 'popular_articles': popular_articles}
     return HttpResponse(template.render(context, request))
 
 

@@ -83,39 +83,43 @@ ddsmoothmenu.init({
         <div class="newscol col half">
 	        <h2>COVID-19 Recent News</h2>
             <div class="newsbox col one_fourth">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' recent_articles.0.id %}"><img src="{% static 'newsfeed/images/art/2.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' recent_articles.0.id %}">{{ recent_articles.0.article_title }}</a></h6>
+                <h6>{{ recent_articles.0.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.0.article_positive_votes}}</p>
+                <p>{{ recent_articles.0.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.0.article_negative_votes }}</p>
+                <p>{{ recent_articles.0.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}"><img src="{% static 'newsfeed/images/tooplate_image_02.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}">{{ latest_articles_list.1.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' recent_articles.1.id %}"><img src="{% static 'newsfeed/images/art/3.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' recent_articles.1.id %}">{{ recent_articles.1.article_title }}</a></h6>
+                <h6>{{ recent_articles.1.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.1.article_positive_votes}}</p>
+                <p>{{ recent_articles.1.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.1.article_negative_votes }}</p>
+                <p>{{ recent_articles.1.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}"><img src="{% static 'newsfeed/images/tooplate_image_03.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}">{{ latest_articles_list.2.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' recent_articles.2.id %}"><img src="{% static 'newsfeed/images/art/4.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' recent_articles.2.id %}">{{ recent_articles.2.article_title }}</a></h6>
+                <h6>{{ recent_articles.2.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.2.article_positive_votes}}</p>
+                <p>{{ recent_articles.2.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.2.article_negative_votes }}</p>
+                <p>{{ recent_articles.2.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}"><img src="{% static 'newsfeed/images/tooplate_image_04.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}">{{ latest_articles_list.3.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' recent_articles.3.id %}"><img src="{% static 'newsfeed/images/art/8.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' recent_articles.3.id %}">{{ recent_articles.3.article_title }}</a></h6>
+                <h6>{{ recent_articles.3.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.3.article_positive_votes}}</p>
+                <p>{{ recent_articles.3.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.3.article_negative_votes }}</p>
+                <p>{{ recent_articles.3.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
         </div>
@@ -123,39 +127,43 @@ ddsmoothmenu.init({
         <div class="newscol col half no_margin_right">
 	        <h2>COVID-19 Popular news</h2>
             <div class="newsbox col one_fourth">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}"><img src="{% static 'newsfeed/images/tooplate_image_01.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.0.id %}">{{ latest_articles_list.0.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' popular_articles.0.id %}"><img src="{% static 'newsfeed/images/art/1.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' popular_articles.0.id %}">{{ popular_articles.0.article_title }}</a></h6>
+                <h6>{{ popular_articles.0.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.0.article_positive_votes}}</p>
+                <p>{{ popular_articles.0.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.0.article_negative_votes }}</p>
+                <p>{{ popular_articles.0.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}"><img src="{% static 'newsfeed/images/tooplate_image_02.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.1.id %}">{{ latest_articles_list.1.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' popular_articles.1.id %}"><img src="{% static 'newsfeed/images/art/5.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' popular_articles.1.id %}">{{ popular_articles.1.article_title }}</a></h6>
+                <h6>{{ popular_articles.1.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.1.article_positive_votes}}</p>
+                <p>{{ popular_articles.1.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.1.article_negative_votes }}</p>
+                <p>{{ popular_articles.1.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}"><img src="{% static 'newsfeed/images/tooplate_image_03.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.2.id %}">{{ latest_articles_list.2.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' popular_articles.2.id %}"><img src="{% static 'newsfeed/images/art/6.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' popular_articles.2.id %}">{{ popular_articles.2.article_title }}</a></h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.2.article_positive_votes}}</p>
+                <h6>{{ popular_articles.2.date_str }}</h6>
+                <p>{{ popular_articles.2.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.2.article_negative_votes }}</p>
+                <p>{{ popular_articles.2.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
             <div class="newsbox col one_fourth no_margin_right">
-            	<a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}"><img src="{% static 'newsfeed/images/tooplate_image_04.jpg' %}" alt="image" /></a>
-                <h6><a href="{% url 'newsfeed:detail' latest_articles_list.3.id %}">{{ latest_articles_list.3.article_title }}</a></h6>
+            	<a href="{% url 'newsfeed:detail' popular_articles.3.id %}"><img src="{% static 'newsfeed/images/art/7.jpeg' %}" style="width:65px;height:65px" alt="image" /></a>
+                <h6><a href="{% url 'newsfeed:detail' popular_articles.3.id %}">{{ popular_articles.3.article_title }}</a></h6>
+                <h6>{{ popular_articles.3.date_str }}</h6>
                 <img src="{% static 'newsfeed/images/arrow-up.png' %}" alt="up" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.3.article_positive_votes}}</p>
+                <p>{{ popular_articles.3.article_positive_votes}}</p>
                 <img src="{% static 'newsfeed/images/arrow-down.png' %}" alt="down" style="width:15px;height:15px"/>
-                <p>{{ latest_articles_list.3.article_negative_votes }}</p>
+                <p>{{ popular_articles.3.article_negative_votes }}</p>
            	  <div class="cleaner"></div>
             </div>
         </div>
